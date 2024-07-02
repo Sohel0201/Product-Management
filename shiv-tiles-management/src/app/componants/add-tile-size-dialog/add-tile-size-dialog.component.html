@@ -1,0 +1,28 @@
+<div class="container add-tile-size-dialog">
+  <h2 mat-dialog-title>Add New Tile Size</h2>
+  <mat-dialog-content>
+    <mat-form-field class="full-width">
+      <mat-label>Tile Size</mat-label>
+      <input matInput [(ngModel)]="newSize" required />
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="col-4">
+      <button type="button" class="btn btn-outline-danger" (click)="onCancel()">
+        Cancel
+      </button>
+    </div>
+    <div class="col-4"></div>
+    <div class="col-4">
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        style="width: 80px"
+        (click)="onSave()"
+        [disabled]="!newSize"
+      >
+        Save
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>

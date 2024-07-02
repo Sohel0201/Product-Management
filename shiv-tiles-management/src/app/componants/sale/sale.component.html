@@ -1,0 +1,173 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-10 col-lg-8">
+      <!-- Form Card -->
+      <div class="card custom-card mb-5">
+        <div class="card-body">
+          <form class="defaultMargin">
+            <div
+              class="poppins-semibold text-center fw-semibold fs-3 mt-2 mb-3"
+            >
+              Sale Tiles
+            </div>
+            <hr />
+            <div class="row mb-3">
+              <div class="col-2"></div>
+              <div
+                class="col-12 col-md-2 text-start fs-6 inter-400 d-flex align-items-center"
+              >
+                <label for="tileSize" class="form-label mb-0">Tile Size</label>
+              </div>
+              <div class="col-12 col-md-6">
+                <mat-form-field appearance="fill" class="w-100">
+                  <input
+                    type="text"
+                    matInput
+                    [formControl]="tileSizeInput"
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option
+                      *ngFor="let size of filteredTileSizes | async"
+                      [value]="size.size"
+                      (onSelectionChange)="selectTileSize(size)"
+                    >
+                      {{ size.size }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row mb-3" *ngIf="tileSizeInput.value">
+              <div class="col-2"></div>
+              <div
+                class="col-12 col-md-2 text-start fs-6 inter-400 d-flex align-items-center"
+              >
+                <label for="tileDesign" class="form-label mb-0"
+                  >Tile Design</label
+                >
+              </div>
+              <div class="col-12 col-md-6">
+                <mat-form-field appearance="fill" class="w-100">
+                  <input
+                    type="text"
+                    matInput
+                    [formControl]="tileDesignInput"
+                    [matAutocomplete]="autoDesign"
+                  />
+                  <mat-autocomplete #autoDesign="matAutocomplete">
+                    <mat-option
+                      *ngFor="let design of filteredTileDesigns | async"
+                      [value]="design.design"
+                      (onSelectionChange)="selectTileDesign(design)"
+                    >
+                      {{ design.design }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row mb-3" *ngIf="tileDesignInput.value">
+              <div class="col-2"></div>
+              <div
+                class="col-12 col-md-2 text-start fs-6 inter-400 d-flex align-items-center"
+              >
+                <label for="quantity" class="form-label mb-0">Quantity</label>
+              </div>
+              <div class="col-12 col-md-6">
+                <mat-form-field appearance="fill" class="w-100">
+                  <mat-label>Quantity</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    class="example-right-align"
+                    placeholder="0"
+                    [disabled]="!tileDesignInput.value"
+                    [formControl]="quantityInput"
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <hr />
+            <div class="d-flex justify-content-center mt-3">
+              <button
+                type="button"
+                class="btn btn-outline-success btn-lg d-flex px-3 align-items-center poppins-regular"
+                (click)="sale()"
+              >
+                Sale
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-12 col-lg-8">
+      <!-- Table Card -->
+      <div class="card custom-card-table mb-5 mx-auto" style="max-width: 100%">
+        <div class="card-body">
+          <div class="poppins-semibold text-center fw-semibold fs-3 mt-2 mb-3">
+            Sales Data
+          </div>
+          <hr />
+          <div class="mt-5">
+            <p-table
+              [value]="sales"
+              [paginator]="true"
+              [rows]="10"
+              [rowsPerPageOptions]="[5, 10, 20]"
+              [filterDelay]="500"
+              [globalFilterFields]="[
+                'tile.design',
+                'tile.tileSize.size',
+                'saleQty',
+                'saleDate',
+                'tile.stock'
+              ]"
+            >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th pSortableColumn="tile.design">
+                    Tile Design
+                    <p-sortIcon field="tile.design"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="tile.tileSize.size">
+                    Tile Size
+                    <p-sortIcon field="tile.tileSize.size"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="saleQty">
+                    Sale Quantity <p-sortIcon field="saleQty"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="saleDate">
+                    Sale Date <p-sortIcon field="saleDate"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="tile.stock">
+                    Tile Stock <p-sortIcon field="tile.stock"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-sale>
+                <tr>
+                  <td>{{ sale.tile.design }}</td>
+                  <td>{{ sale.tile.tileSize.size }}</td>
+                  <td>{{ sale.saleQty }}</td>
+                  <td>{{ sale.saleDate | date : "MM/dd/yyyy" }}</td>
+                  <td>{{ sale.tile.stock }}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="5">No sales found.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

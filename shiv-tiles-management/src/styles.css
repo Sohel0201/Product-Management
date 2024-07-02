@@ -1,0 +1,68 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.blur-background {
+  backdrop-filter: blur(5px);
+  background-color: rgba(128, 128, 128, 0.5);
+}
+
+.body1 {
+  background-image: url("assets/images/background.jpg");
+  background-size: cover; /* Adjusts image size to cover the entire screen */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-position: center; /* Centers the image */
+  font-family: "Poppins", sans-serif; /* Optional: Custom font */
+  min-height: 100vh;
+  margin: 0;
+}
+
+.content-wrapper {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+  ); /* Adds a semi-transparent white background to the content */
+
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.logo {
+  background-image: url("assets/images/ShivTilesLogo1.png");
+}
+.custom-card {
+  background: rgba(255, 255, 255, 0.8); /* Partial transparency */
+  backdrop-filter: blur(0.2px); /* Blur effect */
+  border-radius: 15px; /* Optional: rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow for better visibility */
+}
+.custom-card-table {
+  background: rgba(255, 255, 255, 0.8); /* Partial transparency */
+  backdrop-filter: blur(5px); /* Blur effect */
+  border-radius: 15px; /* Optional: rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow for better visibility */
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+}
