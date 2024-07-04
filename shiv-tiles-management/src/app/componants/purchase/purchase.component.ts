@@ -18,6 +18,7 @@ import { AddTileSizeDialogComponent } from '../add-tile-size-dialog/add-tile-siz
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { TileService } from '../../services/tile.service';
 import { PurchaseService } from '../../services/purchase.service';
+import { TableHeaderCheckbox, TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-purchase',
@@ -32,7 +33,7 @@ import { PurchaseService } from '../../services/purchase.service';
     MatInputModule,
     MatAutocompleteModule,
     RouterLink,
-    HeaderComponent,
+    TableModule,
     MatDialogModule,
   ],
 })
@@ -44,6 +45,8 @@ export class PurchaseComponent implements OnInit {
   tileDesigns: TileDTO[] = [];
   filteredTileDesigns!: Observable<TileDTO[]>;
   quantityInput = new FormControl('');
+  tiles: TileDTO[] = [];
+  purchases: PurchaseDTO[] = [];
 
   constructor(
     private tileSizeService: TileSizeService,
@@ -76,6 +79,19 @@ export class PurchaseComponent implements OnInit {
         this.fetchAndFilterTileDesigns(selectedTileSize.id);
       }
     });
+
+    this.tileService.tiles$.subscribe((data) => {
+      this.tiles = data;
+      console.log('Tiles:', this.tiles);
+      this.purchases = this.tiles.flatMap((tile) => {
+        return tile.purchases.map((purchase) => ({
+          ...purchase,
+          tile,
+        }));
+      });
+    });
+
+    this.tileService.fetchTiles();
   }
 
   private _filterTileSizes(value: string): TileSizeDTO[] {

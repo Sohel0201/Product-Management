@@ -107,4 +107,70 @@
       </div>
     </div>
   </div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-12 col-lg-8">
+      <!-- Table Card -->
+      <div class="card custom-card-table mb-5 mx-auto" style="max-width: 100%">
+        <div class="card-body">
+          <div class="poppins-semibold text-center fw-semibold fs-3 mt-2 mb-3">
+            Purchase Data
+          </div>
+          <hr />
+          <div class="mt-5">
+            <p-table
+              [value]="purchases"
+              [paginator]="true"
+              [rows]="10"
+              [rowsPerPageOptions]="[5, 10, 20]"
+              [filterDelay]="500"
+              [globalFilterFields]="[
+                'tile.design',
+                'tile.tileSize.size',
+                'purchaseQty',
+                'purchaseDate',
+                'tile.stock'
+              ]"
+            >
+              <ng-template pTemplate="header">
+                <tr>
+                  <th pSortableColumn="tile.design">
+                    Tile Design
+                    <p-sortIcon field="tile.design"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="tile.tileSize.size">
+                    Tile Size
+                    <p-sortIcon field="tile.tileSize.size"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="PurchaseQty">
+                    Purchase Quantity
+                    <p-sortIcon field="purchaseQty"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="PurchaseDate">
+                    Purchase Date <p-sortIcon field="purchaseDate"></p-sortIcon>
+                  </th>
+                  <th pSortableColumn="tile.stock">
+                    Tile Stock <p-sortIcon field="tile.stock"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-sale>
+                <tr>
+                  <td>{{ purchase.tile.design }}</td>
+                  <td>{{ purchase.tile.tileSize.size }}</td>
+                  <td>{{ purchase.purchaseQty }}</td>
+                  <td>{{ purchase.purchaseDate | date : "MM/dd/yyyy" }}</td>
+                  <td>{{ purchase.tile.stock }}</td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="5">No Purchase found.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
